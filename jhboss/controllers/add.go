@@ -827,7 +827,7 @@ func (this *AddController) AddMerchantPayType() {
 	merchantDeployInfo.RollRoadAgentRate = d
 	merchantDeployInfo.IsLoan = isLoan
 	merchantDeployInfo.LoanRate = e
-	merchantDeployInfo.LoanDays = i
+	merchantDeployInfo.LoanDay = i
 	merchantDeployInfo.UnfreezeHour = j
 	merchantDeployInfo.RollRoadName = rollPoolRoad
 	roadInfo := models.GetRoadInfoByName(singleRoad)

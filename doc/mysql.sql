@@ -16,7 +16,7 @@ CREATE TABLE  IF NOT EXISTS `user_info`(
   primary key (`id`),
   unique key `u_user_id` (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员表';
-insert into user_info (user_id, passwd, nick, status, role) values ("10086", "FFB23F80E5F0DA11ED14BA13FCF528DD", "admin", "active", "nothing");
+insert into user_info (user_id, passwd, nick, status, role) values ("10086", "4441E5D70B3657900FA57E66DB407E0B", "admin", "active", "nothing");
 
 /*
 * 创建一级菜单表
@@ -148,8 +148,8 @@ CREATE TABLE IF NOT EXISTS `road_info` (
   `balance` decimal(20, 3) not null default 0 comment '通道的余额',
   `request_all` int default 0 comment '请求总次数',
   `request_success` int  default 0 comment '请求成功次数',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `road_name` (`road_name`),
   unique `road_uid` (`road_uid`)
@@ -164,8 +164,8 @@ CREATE TABLE IF NOT EXISTS `road_pool_info` (
   `road_pool_name` varchar(100) not null comment '通道池名称',
   `road_pool_code` varchar(100) not null comment '通道池编号',
   `road_uid_pool` text comment '通道池里面的通道uid',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `road_pool_name` (`road_pool_name`),
   unique `road_pool_code` (`road_pool_code`)
@@ -194,8 +194,8 @@ CREATE TABLE IF NOT EXISTS `merchant_info`(
   `roll_pay_for_road_code` varchar(100) comment '轮询代付通道编码',
   `roll_pay_for_road_name` varchar(200) comment '轮询代付通道名称',
   `payfor_fee` double comment '代付手续费',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `merchant_uid` (`merchant_uid`),
   unique `merchant_name` (`merchant_name`),
@@ -225,8 +225,8 @@ CREATE TABLE IF NOT EXISTS `merchant_deploy_info`(
   `unfreeze_hour` int not null default 0 comment '每天解款的时间点，默认是凌晨',
   `wait_unfreeze_amount` decimal(20,3) comment '等待解款的金额',
   `loan_amount` decimal(20,3) comment '押款中的金额',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户通道配置；\r\n单通道给商户的汇率=single_road_platform_rate+single_road_agent_rate+basic_fee；\r\n轮询通道汇率=roll_road_platform_rate+roll_road_agent_rate+basic_fee；';
 
@@ -240,8 +240,8 @@ CREATE TABLE IF NOT EXISTS `merchant_deploy_info`(
   `road_uid` varchar(50) not null comment '通道uid',
   `load_date` varchar(50) not null comment '押款日期，格式2019-10-10',
   `load_amount` decimal(20,3) not null default 0 comment '押款金额',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户对应的每条通道的押款信息';
 
@@ -259,8 +259,8 @@ CREATE TABLE IF NOT EXISTS `account_info` (
   `wait_amount` decimal(20,3) not null default 0 comment '待结算资金',
   `freeze_amount` decimal(20,3) not null default 0 comment '账户冻结金额',
   `payfor_amount` decimal(20,3) not null default 0 comment '账户代付中金额',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `account_uid` (`account_uid`),
   unique `account_name` (`account_name`)
@@ -276,8 +276,8 @@ CREATE TABLE IF NOT EXISTS `account_history_info` (
   `type` varchar(20) not null default "" comment '减款，加款',
   `amount` decimal(20,3) not null default 0 comment '操作对应金额对应的金额',
   `balance` decimal(20,3) not null default 0 comment '操作后的当前余额',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户账户资金动向表';
 
@@ -294,8 +294,8 @@ CREATE TABLE IF NOT EXISTS `agent_info` (
   `agent_uid` varchar(100) not null comment '代理编号',
   `agent_phone` varchar(15) not null comment '代理手机号',
   `agent_remark` text comment '备注',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `agent_name` (`agent_name`),
   unique `agent_uid` (`agent_uid`)
@@ -337,8 +337,8 @@ CREATE TABLE IF NOT EXISTS `order_info` (
   `agent_uid` varchar(100) comment '代理uid，表示该商户是谁的代理',
   `agent_name` varchar(200) comment '代理名称',
   `response` text comment '上游返回的结果',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `merchant_order_id` (`merchant_order_id`),
   unique `bank_order_id` (`bank_order_id`)
@@ -372,8 +372,8 @@ CREATE TABLE IF NOT EXISTS `order_info` (
   `supplier_profit` decimal(20,3) not null default 0 comment '上游的利润',
   `platform_profit` decimal(20,3) not null default 0 comment '平台利润',
   `agent_profit` decimal(20, 3) not null default 0 comment '代理利润',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `merchant_order_id` (`merchant_order_id`),
   unique `bank_order_id` (`bank_order_id`)
@@ -396,8 +396,8 @@ CREATE TABLE IF NOT EXISTS `order_settle_info` (
   `settle_amount` decimal(20,3) not null default 0 comment '结算金额',
   `is_allow_settle` varchar(10) not null default 'yes' comment '是否允许结算，允许-yes，不允许-no',
   `is_complete_settle` varchar(10) not null default 'no' comment '该笔订单是否结算完毕，没有结算-no，结算完毕-yes',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `merchant_order_id` (`merchant_order_id`),
   unique `bank_order_id` (`bank_order_id`)
@@ -415,8 +415,8 @@ CREATE TABLE IF NOT EXISTS `notify_info` (
   `times` int not null default 0 comment '回调次数',
   `url` text comment '回调的url',
   `response` text comment '回调返回的结果',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `merchant_order_id` (`merchant_order_id`),
   unique `bank_order_id` (`bank_order_id`)
@@ -457,11 +457,11 @@ CREATE TABLE IF NOT EXISTS `payfor_info` (
   `status` varchar(20) not null default "wait" comment '审核-payfor_confirm,系统处理中-payfor_solving，银行处理中-payfor_banking，代付成功-success, 代付失败-failed',
   `is_send` varchar(10) not null default "no" comment '未发送-no，已经发送-yes',
   `request_time` timestamp not null comment '发起请求时间',
-  `response_time` timestamp not null comment '上游做出响应的时间',
+  `response_time` timestamp not null default current_timestamp comment '上游做出响应的时间',
   `response_content` text comment '代付的最终结果',
   `remark` text comment '代付备注',
-  `update_time` timestamp not null comment '更新时间',
-  `create_time` timestamp not null comment '创建时间',
+  `update_time` timestamp not null default current_timestamp comment '更新时间',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
   primary key (`id`),
   unique `payfor_uid` (`payfor_uid`),
   unique `merchant_order_id` (`merchant_order_id`),

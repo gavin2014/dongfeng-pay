@@ -309,7 +309,7 @@ func (c *KuaiFuImpl) PayForQuery(payFor models.PayforInfo) (string, string) {
 		return common.PAYFOR_SOLVING, "查询失败"
 	}
 
-	payFor.ResponseContext = response
+	payFor.ResponseContent = response
 	payFor.ResponseTime = utils.GetBasicDateTime()
 	payFor.UpdateTime = utils.GetBasicDateTime()
 	if !models.UpdatePayFor(payFor) {

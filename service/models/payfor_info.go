@@ -49,7 +49,7 @@ type PayforInfo struct {
 	IsSend             string
 	RequestTime        string
 	ResponseTime       string
-	ResponseContext    string
+	ResponseContent    string
 	Remark             string
 	CreateTime         string
 	UpdateTime         string
@@ -205,7 +205,7 @@ func ForUpdatePayFor(payFor PayforInfo) bool {
 			}
 		} else {
 			logs.Error(fmt.Sprintf("商户uid=%s，可用金额不够", payFor.MerchantUid))
-			payFor.ResponseContext = "商户可用余额不足"
+			payFor.ResponseContent = "商户可用余额不足"
 			payFor.Status = common.PAYFOR_FAIL
 		}
 	}

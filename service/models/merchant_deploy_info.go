@@ -29,7 +29,7 @@ type MerchantDeployInfo struct {
 	RollRoadAgentRate      float64
 	IsLoan                 string
 	LoanRate               float64
-	LoanDays               int
+	LoanDay                int
 	UnfreezeHour           int
 	WaitUnfreezeAmount     float64
 	LoanAmount             float64

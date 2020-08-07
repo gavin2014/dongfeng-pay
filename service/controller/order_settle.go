@@ -126,7 +126,7 @@ func MerchantLoadSolve() {
 	for _, merchantDeploy := range merchantDeployList {
 		logs.Info(fmt.Sprintf("开始执行商户uid=%s，进行解款操作", merchantDeploy.MerchantUid))
 
-		loadDate := utils.GetDateBeforeDays(merchantDeploy.LoanDays)
+		loadDate := utils.GetDateBeforeDays(merchantDeploy.LoanDay)
 		params := make(map[string]string)
 		params["status"] = common.NO
 		params["merchant_uid"] = merchantDeploy.MerchantUid
